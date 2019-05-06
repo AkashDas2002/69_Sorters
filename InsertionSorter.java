@@ -11,7 +11,7 @@ public class InsertionSorter extends Sorter {
      */
     public InsertionSorter(  ArrayList< String> usersData) {
         // your code here, if necessary
-	elements = usersData;
+	super(usersData);
     }
     
 
@@ -20,20 +20,23 @@ public class InsertionSorter extends Sorter {
      */
     public void mySort() {
         // your code here
+	for (int alreadyInserted = 0; alreadyInserted < elements.size(); alreadyInserted++){
+	    insert(alreadyInserted);
+	}
     }
 
     public void shift(int index){
-	elements.set(index + 1, list.get(index));
+	elements.set(index + 1, elements.get(index));
     }
 
-    public void drop(int indexToDropAfter, int valueToDrop){
+    public void drop(int indexToDropAfter, String valueToDrop){
 	elements.set(indexToDropAfter + 1, valueToDrop);
     }
     
     public void insert(int alreadyInserted) {
 	String valueToInsert = elements.get(alreadyInserted);
 	int indexToCompare = alreadyInserted - 1;
-	while( indexToCompare >= 0 && valueToInsert.compareTo(list.get(indexToCompare)) < 0) {
+	while( indexToCompare >= 0 && valueToInsert.compareTo(elements.get(indexToCompare)) < 0) {
 	    shift(indexToCompare);
 	    indexToCompare--;
 	}
@@ -41,9 +44,4 @@ public class InsertionSorter extends Sorter {
 	drop(indexToCompare,valueToInsert);
     }
 
-    public static void insertionSort(List_inArraySlots list) {
-	for (int alreadyInserted = 0; alreadyInserted < list.size(); alreadyInserted++){
-	    insert(list, alreadyInserted);
-	}
-    }
 }
